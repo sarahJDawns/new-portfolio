@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content"; 
 import type { CollectionEntry } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -19,6 +19,11 @@ interface Props {
 const { post } = Astro.props;
 
 const { Content } = await render(post); 
+
+// Simple Read Time Logic
+const wordsPerMinute = 200;
+const wordCount = post.body?.split(/\s+/g).length || 0;
+const readTime = Math.ceil(wordCount / wordsPerMinute);
 ---
 
 <BaseLayout title={post.data.title}>
@@ -28,6 +33,10 @@ const { Content } = await render(post);
       <h1 class="text-4xl font-bold">{post.data.title}</h1>
       {post.data.description && <p class="text-lg text-zinc-500 italic">{post.data.description}</p>}
       <p class="text-sm text-zinc-400">Published on {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      <div class="flex gap-4 text-sm text-zinc-400 mt-2">
+             <span>{post.data.pubDate.toLocaleDateString()}</span>
+             <span>•</span>
+             <span>{readTime} min read</span> </div>
     </header>
 
     <div class="mt-8">

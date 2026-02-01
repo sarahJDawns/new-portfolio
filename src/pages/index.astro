@@ -1,7 +1,8 @@
 ---
+import { SITE, HOME } from "@/consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const projects: CollectionEntry<"projects">[] = (await getCollection("projects")).sort(
   (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
@@ -12,12 +13,14 @@ const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
   (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) => 
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+const title = `${SITE.TITLE} | ${HOME.TITLE}`;
 ---
 
-<BaseLayout title="Home | Sarah's Portfolio">
+<BaseLayout title={title}>
   <section class="mb-16">
     <h1 class="text-4xl font-bold mb-2">
-      Sarah J. — Support Engineer & Artist
+      {SITE.TITLE}
     </h1>
     <p class="text-lg text-zinc-600">
       Crafting thoughtful solutions with code and bringing ideas to life with

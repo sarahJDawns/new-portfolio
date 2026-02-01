@@ -2,7 +2,8 @@
 title: "Astro Portfolio"
 description: "A high-performance portfolio built with Bun, Fish 4.0, and Zed."
 pubDate: 2026-01-31
-cover: "../../assets/portfolio-hero.png" # If you have an image
+cover: "@/assets/#.png" 
+coverAlt: "Portfolio Hero Image"
 links:
   - name: "GitHub"
     url: "https://github.com/yourname/portfolio"

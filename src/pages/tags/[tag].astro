@@ -1,0 +1,77 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const projects = await getCollection("projects");
+  const allContent = [...posts, ...projects];
+
+  const allTags = [
+    ...new Set(allContent.flatMap((item) => item.data.tags || [])),
+  ];
+
+  return allTags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts.filter((p) => (p.data.tags || []).includes(tag)),
+      projects: projects.filter((p) => (p.data.tags || []).includes(tag)),
+    },
+  }));
+}
+
+const { tag, posts, projects } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag}`}>
+  <h1 class="text-3xl font-bold mb-8">Tagged with "{tag}"</h1>
+
+  {
+    projects.length > 0 && (
+      <section class="mb-12">
+        <h2 class="text-xl font-semibold mb-4">Projects</h2>
+        <div class="grid gap-4">
+          {projects.map((project) => (
+            <div class="border p-4 rounded hover:border-sky-500 transition-colors">
+              <h3 class="font-bold text-xl">
+                <a href={`/projects/${project.id}`} class="hover:text-sky-600 transition-colors">
+                  {project.data.title}
+                </a>
+              </h3>
+              <div class="flex gap-2 mt-2">
+                {(project.data.tags ?? []).map((t) => (
+                  <span class="text-xs text-zinc-500">#{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    posts.length > 0 && (
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Posts</h2>
+        <div class="grid gap-4">
+          {posts.map((post) => (
+            <div class="border p-4 rounded hover:border-sky-500 transition-colors">
+              <h3 class="font-bold text-xl">
+                <a href={`/posts/${post.id}`} class="hover:text-sky-600 transition-colors">
+                  {post.data.title}
+                </a>
+              </h3>
+              <div class="flex gap-2 mt-2">
+                {(post.data.tags ?? []).map((t) => (
+                  <span class="text-xs text-zinc-500">#{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+</BaseLayout>

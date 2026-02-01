@@ -1,7 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { PROJECTS } from "@/consts";
 
 const allProjects: CollectionEntry<"projects">[] = await getCollection("projects");
 
@@ -9,13 +10,16 @@ const projects = allProjects.sort(
   (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
+
+const title = `${PROJECTS.TITLE}`;
+
 ---
 
-<BaseLayout title="Projects | Sarah's Portfolio">
+<BaseLayout title={title}>
   <section class="mb-16">
-    <h1 class="text-4xl font-bold mb-2">Projects</h1>
+    <h1 class="text-4xl font-bold mb-2">{PROJECTS.TITLE}</h1>
     <p class="text-lg text-zinc-600">
-      A collection of my technical work and experiments.
+      {PROJECTS.DESCRIPTION}
     </p>
   </section>
 
