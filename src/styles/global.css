@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+:root {
+  --color-ink: #1a1a1b;
+  --color-paper: #f9f8f4;
+  --font-serif: "Georgia", serif;
+}

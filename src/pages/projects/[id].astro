@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from "astro:content"; 
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
+  
+  return allProjects.map((project: CollectionEntry<"projects">) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+
+const { Content } = await render(project); 
+---
+
+<BaseLayout title={project.data.title}>
+  <a href="/projects" class="text-sky-600 hover:underline mb-8 block">&larr; Back to Projects</a>
+  <article class="prose prose-zinc max-w-none">
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold">{project.data.title}</h1>
+      <p class="text-lg text-zinc-500 italic">{project.data.description}</p>
+      <p class="text-sm text-zinc-400">
+        Published on {project.data.pubDate.toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        })}
+      </p>
+    </header>
+
+    <div class="mt-8">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

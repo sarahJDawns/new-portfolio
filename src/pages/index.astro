@@ -1,86 +1,61 @@
 ---
 import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const projects = await getCollection("projects");
-const posts = await getCollection("posts");
-
-// Sort by date (newest first)
-const sortedProjects = projects.sort((a: any, b: any) => 
-  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const projects: CollectionEntry<"projects">[] = (await getCollection("projects")).sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const sortedPosts = posts.sort((a: any, b: any) => 
-  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
+  (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) => 
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Home | Sarah's Portfolio">
   <section class="mb-16">
-    <h1 class="text-3xl font-bold mb-4">Your Name</h1>
-    <p class="text-zinc-600">
-      Developer & Artist. Building clean things with code and color.
+    <h1 class="text-4xl font-bold mb-2">
+      Sarah J. — Support Engineer & Artist
+    </h1>
+    <p class="text-lg text-zinc-600">
+      Crafting thoughtful solutions with code and bringing ideas to life with
+      ink and watercolor.
     </p>
   </section>
 
   <section class="mb-16">
-    <h2 class="text-xl font-semibold mb-6 border-b border-zinc-200 pb-2">
-      Technical Projects
+    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-200 pb-3">
+      Recent Projects
     </h2>
-    <div class="space-y-8">
+    <div class="space-y-10">
       {
-        sortedProjects.map(
-          (
-            project: any, // Using 'any' as a quick bypass or specific shape
-          ) => (
-            <article>
-              <h3 class="text-lg font-medium hover:text-sky-600 transition-colors">
-                  <a href={`/projects/${project.id}`}>
-                    {project.data.title} →
-                  </a>
-                </h3>
-                <p class="text-zinc-600 text-sm mb-2">{project.data.description}</p>
-              <div class="flex gap-4">
-                {project.data.links?.map(
-                  (link: { name: string; url: string }) => (
-                    <a
-                      href={link.url}
-                      class="text-xs text-sky-600 hover:underline"
-                    >
-                      {link.name}
-                    </a>
-                  ),
-                )}
-              </div>
-            </article>
-          ),
-        )
+        projects.map((project) => (
+          <article>
+             <a href={`/projects/${project.id}`}>
+                <h3 class="text-xl font-semibold mb-2">{project.data.title}</h3>
+                <p class="text-zinc-600">{project.data.description}</p>
+             </a>
+          </article>
+        ))
       }
     </div>
   </section>
 
   <section>
-    <h2 class="text-xl font-semibold mb-6 border-b border-zinc-200 pb-2">
-      Art & Thoughts
+    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-200 pb-3">
+      From the Studio
     </h2>
     {
-      sortedPosts.length === 0 ? (
-        <p class="text-zinc-400 italic">
-          Coming soon... once I pick up the brush.
-        </p>
-      ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {sortedPosts.map((post: any) => (
-            <article class="p-4 border border-zinc-100 rounded-lg">
-              <h3 class="font-medium">{post.data.title}</h3>
-              <p class="text-xs text-zinc-500">
-                {post.data.pubDate.toLocaleDateString()}
-              </p>
-            </article>
-          ))}
-        </div>
-      )
+      posts.map((post) => (
+      <article>
+         <a href={`/posts/${post.id}`}>
+            <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
+            <p class="text-zinc-600">{post.data.description}</p>
+         </a>
+      </article>
+      ))
     }
   </section>
 </BaseLayout>

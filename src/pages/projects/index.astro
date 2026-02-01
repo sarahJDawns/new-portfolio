@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const allProjects: CollectionEntry<"projects">[] = await getCollection("projects");
+
+const projects = allProjects.sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+);
+---
+
+<BaseLayout title="Projects | Sarah's Portfolio">
+  <section class="mb-16">
+    <h1 class="text-4xl font-bold mb-2">Projects</h1>
+    <p class="text-lg text-zinc-600">
+      A collection of my technical work and experiments.
+    </p>
+  </section>
+
+  <section>
+    <div class="space-y-10">
+      {
+        projects.map(
+          (
+            project,
+          ) => (
+            <article>
+              <h3 class="text-xl font-medium mb-1">
+                  <a href={`/projects/${project.id}`} class="hover:text-sky-600 transition-colors">
+                    {project.data.title}
+                  </a>
+                </h3>
+                <p class="text-zinc-600 mb-3">{project.data.description}</p>
+              <div class="flex gap-4">
+                {
+                  project.data.links?.map(((link: { name: string; url: string }) => (
+                    <a
+                      href={link.url}
+                      class="text-sky-600 hover:underline text-sm font-medium"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {link.name} &rarr;
+                    </a>
+                  )))
+                }
+              </div>
+            </article>
+          ),
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
