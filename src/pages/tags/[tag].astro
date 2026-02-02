@@ -25,6 +25,7 @@ const { tag, posts, projects } = Astro.props;
 ---
 
 <BaseLayout title={`Tag: ${tag}`}>
+   <a href="/tags" class="hover:underline mb-8 block">&larr; Back to Tags</a>
   <h1 class="text-3xl font-bold mb-8">Tagged with "{tag}"</h1>
 
   {
@@ -33,17 +34,12 @@ const { tag, posts, projects } = Astro.props;
         <h2 class="text-xl font-semibold mb-4">Projects</h2>
         <div class="grid gap-4">
           {projects.map((project) => (
-            <div class="border p-4 rounded hover:border-sky-500 transition-colors">
+            <div class="p-4 transition-colors">
               <h3 class="font-bold text-xl">
-                <a href={`/projects/${project.id}`} class="hover:text-sky-600 transition-colors">
-                  {project.data.title}
+                <a href={`/projects/${project.id}`} class="transition-colors">
+                  &bull; {project.data.title}
                 </a>
               </h3>
-              <div class="flex gap-2 mt-2">
-                {(project.data.tags ?? []).map((t) => (
-                  <span class="text-xs text-zinc-500">#{t}</span>
-                ))}
-              </div>
             </div>
           ))}
         </div>
@@ -57,15 +53,18 @@ const { tag, posts, projects } = Astro.props;
         <h2 class="text-xl font-semibold mb-4">Posts</h2>
         <div class="grid gap-4">
           {posts.map((post) => (
-            <div class="border p-4 rounded hover:border-sky-500 transition-colors">
+            <div class="border p-4 rounded transition-colors">
               <h3 class="font-bold text-xl">
-                <a href={`/posts/${post.id}`} class="hover:text-sky-600 transition-colors">
+                <a
+                  href={`/posts/${post.id}`}
+                  class="transition-colors"
+                >
                   {post.data.title}
                 </a>
               </h3>
               <div class="flex gap-2 mt-2">
                 {(post.data.tags ?? []).map((t) => (
-                  <span class="text-xs text-zinc-500">#{t}</span>
+                  <span class="text-xs ">#{t}</span>
                 ))}
               </div>
             </div>

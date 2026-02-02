@@ -1,46 +1,73 @@
 ---
-import { getCollection, render } from "astro:content"; 
+import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
-  
-  return allPosts.map((post: CollectionEntry<"posts">) => ({
+
+  const sortedPosts = allPosts.sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  return sortedPosts.map((post, index) => ({
     params: { id: post.id },
-    props: { post },
+    props: {
+      post,
+      prevPost: index < sortedPosts.length - 1 ? sortedPosts[index + 1] : null,
+      nextPost: index > 0 ? sortedPosts[index - 1] : null,
+    },
   }));
 }
 
 interface Props {
   post: CollectionEntry<"posts">;
+  prevPost: CollectionEntry<"posts"> | null;
+  nextPost: CollectionEntry<"posts"> | null;
 }
 
-const { post } = Astro.props;
-
-const { Content } = await render(post); 
-
-// Simple Read Time Logic
-const wordsPerMinute = 200;
-const wordCount = post.body?.split(/\s+/g).length || 0;
-const readTime = Math.ceil(wordCount / wordsPerMinute);
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <a href="/posts" class="text-sky-600 hover:underline mb-8 block">&larr; Back to Art & Thoughts</a>
-  <article class="prose prose-zinc max-w-none">
+  <a href="/posts" class="hover:underline mb-8 block">&larr; Back to Art</a>
+  <article class="prose max-w-none">
     <header class="mb-8">
       <h1 class="text-4xl font-bold">{post.data.title}</h1>
-      {post.data.description && <p class="text-lg text-zinc-500 italic">{post.data.description}</p>}
-      <p class="text-sm text-zinc-400">Published on {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-      <div class="flex gap-4 text-sm text-zinc-400 mt-2">
-             <span>{post.data.pubDate.toLocaleDateString()}</span>
-             <span>•</span>
-             <span>{readTime} min read</span> </div>
+      {
+        post.data.description && (
+          <p class="text-lg italic">{post.data.description}</p>
+        )
+      }
     </header>
 
     <div class="mt-8">
       <Content />
+
+      <nav
+        class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8"
+      >
+        {
+          prevPost ? (
+            <a href={`/posts/${prevPost.id}`} class=" transition-colors">
+              ← {prevPost.data.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+
+        {
+          nextPost ? (
+            <a href={`/posts/${nextPost.id}`} class="transition-colors">
+              {nextPost.data.title} →
+            </a>
+          ) : (
+            <span />
+          )
+        }
+      </nav>
     </div>
   </article>
 </BaseLayout>

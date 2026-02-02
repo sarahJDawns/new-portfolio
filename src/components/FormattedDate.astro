@@ -1,0 +1,22 @@
+---
+interface Props {
+  date: Date;
+}
+
+const { date } = Astro.props;
+---
+
+<time datetime={date.toISOString()} class="tabular-nums">
+  {
+    date.toLocaleDateString('en-us', {
+      year: 'numeric',
+      month: 'short', 
+    })
+  }
+</time>
+
+<style>
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+</style>

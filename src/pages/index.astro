@@ -4,15 +4,17 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
-const projects: CollectionEntry<"projects">[] = (await getCollection("projects")).sort(
-  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
+const projects: CollectionEntry<"projects">[] = (
+  await getCollection("projects")
+).sort(
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+).slice(0, 3);
 
 const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
-  (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) => 
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+  (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+).slice(0, 3);
 
 const title = `${SITE.TITLE} | ${HOME.TITLE}`;
 ---
@@ -20,26 +22,32 @@ const title = `${SITE.TITLE} | ${HOME.TITLE}`;
 <BaseLayout title={title}>
   <section class="mb-16">
     <h1 class="text-4xl font-bold mb-2">
-      {SITE.TITLE}
+      {SITE.DESCRIPTION}
     </h1>
-    <p class="text-lg text-zinc-600">
-      Crafting thoughtful solutions with code and bringing ideas to life with
-      ink and watercolor.
-    </p>
   </section>
 
   <section class="mb-16">
-    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-200 pb-3">
+    <h2 class="text-2xl font-semibold mb-6 border-bpb-3">
       Recent Projects
     </h2>
     <div class="space-y-10">
       {
         projects.map((project) => (
           <article>
-             <a href={`/projects/${project.id}`}>
-                <h3 class="text-xl font-semibold mb-2">{project.data.title}</h3>
-                <p class="text-zinc-600">{project.data.description}</p>
-             </a>
+            <a href={`/projects/${project.id}`}>
+              <h3 class="text-xl font-semibold mb-2">{project.data.title}</h3>
+              <p class="italic">{project.data.description}</p>
+            </a>
+            <div class="flex gap-2 my-4">
+              {(project.data.tags ?? []).map((tag) => (
+                <a 
+                  href={`/tags/${tag}`} 
+                  class="text-sm font-medium transition-colors"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
           </article>
         ))
       }
@@ -47,17 +55,17 @@ const title = `${SITE.TITLE} | ${HOME.TITLE}`;
   </section>
 
   <section>
-    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-200 pb-3">
+    <h2 class="text-2xl font-semibold mb-6 border-b pb-3">
       From the Studio
     </h2>
     {
       posts.map((post) => (
-      <article>
-         <a href={`/posts/${post.id}`}>
+        <article>
+          <a href={`/posts/${post.id}`}>
             <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
-            <p class="text-zinc-600">{post.data.description}</p>
-         </a>
-      </article>
+            <p class="italic">{post.data.description}</p>
+          </a>
+        </article>
       ))
     }
   </section>

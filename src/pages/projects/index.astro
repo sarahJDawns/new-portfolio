@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { PROJECTS } from "@/consts";
+import { SITE, PROJECTS } from "@/consts";
 
 const allProjects: CollectionEntry<"projects">[] = await getCollection("projects");
 
@@ -11,14 +11,14 @@ const projects = allProjects.sort(
     new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
 );
 
-const title = `${PROJECTS.TITLE}`;
+const title = `${SITE.TITLE} | ${PROJECTS.TITLE}`;
 
 ---
 
 <BaseLayout title={title}>
   <section class="mb-16">
     <h1 class="text-4xl font-bold mb-2">{PROJECTS.TITLE}</h1>
-    <p class="text-lg text-zinc-600">
+    <p class="text-lg italic">
       {PROJECTS.DESCRIPTION}
     </p>
   </section>
@@ -32,17 +32,27 @@ const title = `${PROJECTS.TITLE}`;
           ) => (
             <article>
               <h3 class="text-xl font-medium mb-1">
-                  <a href={`/projects/${project.id}`} class="hover:text-sky-600 transition-colors">
+                  <a href={`/projects/${project.id}`} class="transition-colors ">
                     {project.data.title}
                   </a>
                 </h3>
-                <p class="text-zinc-600 mb-3">{project.data.description}</p>
+                <p class="mb-3">{project.data.description}</p>
+                <div class="flex gap-2 my-4">
+                  {(project.data.tags ?? []).map((tag) => (
+                    <a 
+                      href={`/tags/${tag}`} 
+                      class="text-sm font-medium transition-colors"
+                    >
+                      #{tag}
+                    </a>
+                  ))}
+                </div>
               <div class="flex gap-4">
                 {
                   project.data.links?.map(((link: { name: string; url: string }) => (
                     <a
                       href={link.url}
-                      class="text-sky-600 hover:underline text-sm font-medium"
+                      class="hover:underline text-sm font-medium"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

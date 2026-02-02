@@ -1,42 +1,43 @@
 import type { Metadata, Site, Socials } from "./types.ts";
 export const SITE: Site = {
-  TITLE: "Sarah J Dawn",
+  TITLE: "Sarah J",
   DESCRIPTION: "A collection.",
   EMAIL: "sarah.j.dawns@gmail.com",
+  NUM_PROJECTS_ON_HOMEPAGE: 3,
   NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_PIECES_ON_HOMEPAGE: 2,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Sarah J. — Support Engineer & Artist",
+  DESCRIPTION: "A collection.",
 };
 
 export const PROJECTS: Metadata = {
-  TITLE: "Projects",
+  TITLE: "Code",
   DESCRIPTION: "A collection of my technical work and experiments.",
 };
 
 export const POSTS: Metadata = {
-  TITLE: "Art & Thoughts",
+  TITLE: "Art",
   DESCRIPTION: "Ink, watercolor, and occasional musings.",
+};
+
+export const ABOUT: Metadata = {
+  TITLE: "The Story",
+  DESCRIPTION: "Crafting thoughtful solutions with code and bringing ideas to life with ink and watercolor. ",
 };
 
 export const SOCIALS: Socials = [
   {
-    NAME: "X (formerly)",
-    HREF: "https://x.com/sjdawns",
+    NAME: "Email",
+    HREF: "mailto:sarah.j.dawns@gmail.com?subject=Website%20Inquiry&body=Hello%20there!",
   },
   {
     NAME: "GitHub",
     HREF: "https://github.com/sarahJDawns",
   },
   {
-    NAME: "Website",
-    HREF: "#",
-  },
-  {
-    NAME: "Email",
-    HREF: "mailto:sarah.j.dawns@gmail.com?subject=Website%20Inquiry&body=Hello%20there!",
-  },
+    NAME: "X",
+    HREF: "https://x.com/sjdawns",
+  }
 ];

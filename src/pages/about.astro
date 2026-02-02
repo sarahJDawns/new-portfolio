@@ -1,17 +1,29 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Image } from 'astro:assets';
+import myImage from '@/assets/grid.png';
+import { SITE, ABOUT } from "@/consts";
+
+const title = `${SITE.TITLE} | ${ABOUT.TITLE}`;
 ---
-<BaseLayout title="About">
-  <article class="prose prose-zinc">
-    <h1 class="text-3xl font-bold mb-6">About Me</h1>
-    <p>This is where your story goes. Minimalist, focused, and high-performance.</p>
+
+<BaseLayout title={title}>
+  <article class="prose">
+    <h1 class="text-3xl font-bold mb-6">The Story</h1>
+    <p class="text-lg italic">
+      Crafting thoughtful solutions with code and bringing ideas to life with
+      ink and watercolor.
+    </p>
+
+    <h2 class="text-xl font-semibold mt-8 mb-4">This is my friend, Grid.</h2>
+    <Image 
+      src={myImage} 
+      alt="This is my friend, Grid." 
+      width={300}  
+      format="webp" 
+      quality="high" 
+      class="rounded-lg"
+    />
     
-    <h2 class="text-xl font-semibold mt-8 mb-4">The Stack</h2>
-    <ul class="list-disc pl-5 space-y-2 text-zinc-600">
-      <li>Framework: Astro 5</li>
-      <li>Styling: Tailwind v4</li>
-      <li>Runtime: Bun</li>
-      <li>Editor: Zed</li>
-    </ul>
   </article>
 </BaseLayout>

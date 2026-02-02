@@ -1,7 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --color-ink: #1a1a1b;
-  --color-paper: #f9f8f4;
-  --font-serif: "Georgia", serif;
+  --bg: #fafaf9;          /* stone-50 */
+  --text: #1c1917;        /* stone-900 */
+  --text-muted: #78716c;  /* stone-500 */
+  --border: #e7e5e4;      /* stone-200 */
+  --link: #075985;        /* sky-800 */
+  --link-hover: #0369a1;  /* sky-700 */
+    
+  --font-mono: 'JetBrains Mono', monospace;
+  /*--font-serif: 'Instrument Serif', serif;*/
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1917;        /* stone-900 */
+    --text: #f5f5f4;      /* stone-100 */
+    --text-muted: #a8a29e; /* stone-400 */
+    --border: #44403c;    /* stone-700 */
+    
+    --link: #38bdf8;       /* sky-400 */
+    --link-hover: #7dd3fc; /* sky-300 */
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  font-family: 'Geist', sans-serif;
+  letter-spacing: -0.01em; 
+  line-height: 1.5;
+}
+
+h1 a, h2 a, h3 a {
+  color: inherit; 
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover {
+  color: var(--link); 
+}
+
+p {
+  color: var(--text-muted);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+nav a, footer a {
+  color: var(--text);
+}
+
+nav a:hover, footer a:hover {
+  color: var(--link);
+}
+
+footer {
+   color: var(--text);
 }
