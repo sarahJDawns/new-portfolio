@@ -19,7 +19,7 @@ export const PROJECTS: Metadata = {
 
 export const POSTS: Metadata = {
   TITLE: "Art",
-  DESCRIPTION: "Ink, watercolor, and occasional musings.",
+  DESCRIPTION: "Ink, watercolor, and occasionally something else.",
 };
 
 export const ABOUT: Metadata = {
