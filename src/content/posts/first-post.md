@@ -1,9 +1,9 @@
 ---
-title: "My First Art Piece"
-pubDate: 2026-01-31
-description: "Just a placeholder to keep the engine running."
-cover: "@/assets/#.png"
-coverAlt: "Placeholder Image"
-tags: ["Archival Ink", "Watercolor"]
+title: "This is my friend, Grid."
+pubDate: 2026-02-04
+description: "Keeping the engine running."
+image: "@/assets/grid.png"
+imageAlt: "Friend Image"
+tags: ["Friend"]
 ---
-Starting my art journey here.
+Catching flying discs.

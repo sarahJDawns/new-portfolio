@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
@@ -31,43 +32,74 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title}>
-  <a href="/posts" class="hover:underline mb-8 block">&larr; Back to Art</a>
-  <article class="prose max-w-none">
-    <header class="mb-8">
-      <h1 class="text-4xl font-bold">{post.data.title}</h1>
+  <a href="/posts" class="text-zinc-500 hover:text-indigo-300 hover:underline mb-8 block transition-colors">
+    &larr; Back to Art
+  </a>
+
+  <article class="max-w-4xl mx-auto">
+      {post.data.image && (
+        <div class="mb-10 overflow-hidden bg-zinc-900 border border-zinc-800">
+          <Image 
+            src={post.data.image} 
+            alt={post.data.imageAlt || post.data.title}
+            class="w-full h-auto object-cover"
+            quality="max"
+            format="webp"
+          />
+        </div>
+      )}
+  
+      <header class="mb-8 border-b pb-8">
+        <h1 class="text-4xl font-bold text-white mb-4">
+          {post.data.title}
+        </h1>
+        
+        {post.data.description && (
+          <p class="text-lg italic text-zinc-400 leading-relaxed mb-6">
+            {post.data.description}
+          </p>
+        )}
+  
+        <div class="flex gap-3 mt-6  mb-4">
+          {
+            (post.data.tags ?? []).map((tag) => (
+              <a
+                href={`/tags/${tag}`}
+                class="tag-link text-sm font-medium " 
+              >
+                #{tag}
+              </a>
+            ))
+          }
+        </div>
+      </header>
+  
+      <div class="prose prose-invert max-w-none">
+        <Content />
+      </div>      
+
+    <nav
+      class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8 border-t border-zinc-800"
+    >
       {
-        post.data.description && (
-          <p class="text-lg italic">{post.data.description}</p>
+        prevPost ? (
+          <a href={`/posts/${prevPost.id}`} class="transition-colors">
+            ← {prevPost.data.title}
+          </a>
+        ) : (
+          <span />
         )
       }
-    </header>
 
-    <div class="mt-8">
-      <Content />
-
-      <nav
-        class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8"
-      >
-        {
-          prevPost ? (
-            <a href={`/posts/${prevPost.id}`} class=" transition-colors">
-              ← {prevPost.data.title}
-            </a>
-          ) : (
-            <span />
-          )
-        }
-
-        {
-          nextPost ? (
-            <a href={`/posts/${nextPost.id}`} class="transition-colors">
-              {nextPost.data.title} →
-            </a>
-          ) : (
-            <span />
-          )
-        }
-      </nav>
-    </div>
+      {
+        nextPost ? (
+          <a href={`/posts/${nextPost.id}`} class="transition-colors text-right">
+            {nextPost.data.title} →
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
   </article>
 </BaseLayout>

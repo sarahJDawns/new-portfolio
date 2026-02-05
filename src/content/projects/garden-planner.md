@@ -5,25 +5,27 @@ pubDate: 2026-02-01
 image: "../../assets/garden-planner.png" 
 imageAlt: "Garden Planner"
 links:
-  - name: "GitHub"
+  - name: "View Source Code"
     url: "https://github.com/sarahJDawns/yellow-book-garden-planner"
 tags: ["Javascript", "Node", "Express", "MongoDB", "Tailwind"]
 ---
 
-## Sign up, log in, or delete your account
--  Requires a user name, email, and password.
-- Also includes bypass button to explore full app before creating a new account.
+## Core Features
 
-## Dashboard provides current local weather information and plant hardiness zone searchable by city and zip code.
+* **User Management & Onboarding**
+  * **Secure Authentication:** Requires username, email, and password.
+  * **Guest Access:** Includes a bypass button to explore the full application functionality before committing to an account.
+  * **Account Control:** Simple interface for profile management and account deletion.
 
-## From dashboard navigate to, drag and drop garden planner, seed/plant spacing calculator, notes, kanban board, and expense log.
+* **Climate & Location Data**
+  * **Weather Integration:** Dashboard provides current local weather information.
+  * **Hardiness Zones:** Automatically determines plant hardiness zones via city or zip code search.
 
-## Use drag and drop garden icons to create a digital mockup of ideal garden layout.
+* **Interactive Planning Tools**
+  * **Drag-and-Drop Planner:** Use custom garden icons to create a digital mockup of your ideal layout.
+  * **Spacing Calculator:** Determine ideal spacing for seeds or plants using an automated calculator and spacing reference table.
 
-## Determine the ideal spacing for seeds or plants with calculator and spacing information table.
-
-## Take notes or upload photos.
-
-## Manage to-do list, prioritize tasks, and monitor progress with kanban board.
-
-## Log and monitor all garden-related expenses.
+* **Management & Productivity**
+  * **Kanban Board:** Manage to-do lists, prioritize seasonal tasks, and monitor project progress.
+  * **Expense Log:** Log and monitor all garden-related financial investments and expenses.
+  * **Project Notes:** Record observations and upload photos to document the growing process.

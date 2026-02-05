@@ -14,16 +14,22 @@ const allTags = [
 ---
 
 <BaseLayout title="All Tags">
-  <h1 class="text-3xl font-bold mb-8">Browse by Tag</h1>
+  <section class="mb-12">
+    <h1 class="text-4xl font-bold mb-2 text-white">Tags</h1>
+    <p class="text-lg italic text-zinc-400">Browse content by category</p>
+  </section>
   
-  <div class="flex flex-wrap gap-3">
+  <div class="flex flex-wrap gap-4">
     {allTags.map((tag) => (
       <a 
         href={`/tags/${tag}`}
-        class="px-4 py-2  border  rounded-lg transition-colors"
+        class="group flex items-center px-4 py-2 border border-zinc-800 rounded-lg bg-zinc-950/50 hover:border-indigo-900/50 transition-all"
       >
-        #{tag}
+        <span class="text-indigo-300 group-hover:text-indigo-200 font-medium transition-colors">
+          #{tag}
+        </span>
       </a>
     ))}
   </div>
+  
 </BaseLayout>

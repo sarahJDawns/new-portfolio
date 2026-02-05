@@ -34,68 +34,84 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={project.data.title}>
-  <a href="/projects" class="hover:underline mb-8 block"
+  <a href="/projects" class="text-zinc-500 hover:text-indigo-300 hover:underline mb-8 block transition-colors"
     >&larr; Back to Projects</a
   >
-  <article class="prose max-w-none">
-    <header class="mb-8">
-      <h1 class="text-4xl font-bold">{project.data.title}</h1>
-      <p class="text-lg italic">{project.data.description}</p>
 
-      <div class="flex gap-2 my-4">
+  <article>
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-white mb-2">{project.data.title}</h1>
+      <p class="text-lg italic text-zinc-400">{project.data.description}</p>
+
+      <div class="flex gap-3 mt-6  mb-4">
         {
           (project.data.tags ?? []).map((tag) => (
             <a
               href={`/tags/${tag}`}
-              class="text-sm font-medium transition-colors"
+              class="tag-link text-sm font-medium " 
             >
               #{tag}
             </a>
           ))
         }
       </div>
+      
+      <div class="flex gap-4">
+        {
+          project.data.links?.map((link: { name: string; url: string }) => (
+            <a
+              href={link.url}
+              class="text-zinc-500 hover:text-indigo-300 text-sm font-medium transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {link.name} &rarr;
+            </a>
+          ))
+        }
+      </div>
     </header>
 
-    <div class="mt-8">
+    <div class="prose prose-invert max-w-none">
       <Content />
-
-      <article class="prose prose-stone dark:prose-invert mx-auto">
-        {
-          project.data.image && (
-            <Image
-              src={project.data.image}
-              alt={project.data.imageAlt || ""}
-              class="mt-8"
-              format="webp"
-              quality="high"
-            />
-          )
-        }
-      </article>
-
-      <nav
-        class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8"
-      >
-        {
-          prevProject ? (
-            <a href={`/projects/${prevProject.id}`} class="transition-colors">
-              ← {prevProject.data.title}
-            </a>
-          ) : (
-            <span />
-          )
-        }
-
-        {
-          nextProject ? (
-            <a href={`/projects/${nextProject.id}`} class="transition-colors">
-              {nextProject.data.title} →
-            </a>
-          ) : (
-            <span />
-          )
-        }
-      </nav>
     </div>
+
+    {
+      project.data.image && (
+        <div class="mt-12">
+          <Image
+            src={project.data.image}
+            alt={project.data.imageAlt || ""}
+            class="rounded-lg border border-zinc-800"
+            format="webp"
+            quality="high"
+          />
+        </div>
+      )
+    }
+
+    <nav
+      class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8 border-t border-zinc-800"
+    >
+      {
+        prevProject ? (
+          <a href={`/projects/${prevProject.id}`} class="text-zinc-500 hover:text-indigo-300 transition-colors">
+            ← {prevProject.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+
+      {
+        nextProject ? (
+          <a href={`/projects/${nextProject.id}`} class="text-zinc-500 hover:text-indigo-300 transition-colors text-right">
+            {nextProject.data.title} →
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
   </article>
 </BaseLayout>

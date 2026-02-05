@@ -5,14 +5,24 @@ pubDate: 2026-02-01
 image: "../../assets/html-email.png" 
 imageAlt: "HTML Email Templates"
 links:
-  - name: "GitHub"
+  - name: "View Source Code"
     url: "https://github.com/sarahJDawns/html-email"
 tags: ["HTML", "CSS"]
 ---
 
-## These templates serve as examples for my portfolio, demonstrating my skills in crafting visually appealing and functional email designs.
+## Portfolio Project: Email Development
 
-- Welcome Email: This file contains the HTML code for the welcome email sent to new subscribers.
-- Order Confirmation Email: This file contains the HTML code for the order confirmation email sent to customers after placing an order.
-- Promotional Email: This file contains the HTML code for a promotional email highlighting a new product or special offer.
+These templates demonstrate a mastery of responsive HTML/CSS design tailored specifically for email clients, focusing on visual hierarchy, cross-platform compatibility, and functional user experiences.
+
+* **Welcome Email**
+    * Designed to establish immediate brand identity for new subscribers.
+    * Focuses on clean typography and a clear Call to Action (CTA) to drive initial engagement.
+
+* **Order Confirmation**
+    * A transactional template built for clarity and information density.
+    * Includes structured data blocks for order summaries, shipping details, and customer support links.
+
+* **Promotional Campaign**
+    * A high-impact marketing template designed to highlight product launches or seasonal offers.
+    * Utilizes responsive image layouts and bold visual blocks to maximize conversion rates.
 

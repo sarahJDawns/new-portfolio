@@ -25,22 +25,30 @@ const { tag, posts, projects } = Astro.props;
 ---
 
 <BaseLayout title={`Tag: ${tag}`}>
-   <a href="/tags" class="hover:underline mb-8 block">&larr; Back to Tags</a>
-  <h1 class="text-3xl font-bold mb-8">Tagged with "{tag}"</h1>
+  <a href="/tags" class="text-zinc-500 hover:text-indigo-300 hover:underline mb-8 block transition-colors">
+    &larr; All Tags
+  </a>
+
+  <header class="mb-12">
+    <h1 class="text-4xl font-bold text-white">
+      Filtered by <span class="text-indigo-300">#{tag}</span>
+    </h1>
+  </header>
 
   {
     projects.length > 0 && (
-      <section class="mb-12">
-        <h2 class="text-xl font-semibold mb-4">Projects</h2>
-        <div class="grid gap-4">
+      <section class="mb-16">
+        <h2 class="text-xl font-semibold mb-6 border-b border-zinc-800 pb-2 text-zinc-400">Projects</h2>
+        <div class="space-y-8">
           {projects.map((project) => (
-            <div class="p-4 transition-colors">
-              <h3 class="font-bold text-xl">
-                <a href={`/projects/${project.id}`} class="transition-colors">
-                  &bull; {project.data.title}
-                </a>
-              </h3>
-            </div>
+            <article>
+              <a href={`/projects/${project.id}`} class="group block">
+                <h3 class="text-xl font-semibold group-hover:text-indigo-300 transition-colors">
+                  {project.data.title}
+                </h3>
+                <p class="text-zinc-500 italic text-sm">{project.data.description}</p>
+              </a>
+            </article>
           ))}
         </div>
       </section>
@@ -50,24 +58,19 @@ const { tag, posts, projects } = Astro.props;
   {
     posts.length > 0 && (
       <section>
-        <h2 class="text-xl font-semibold mb-4">Posts</h2>
-        <div class="grid gap-4">
+        <h2 class="text-xl font-semibold mb-6 border-b border-zinc-800 pb-2 text-zinc-400">Posts</h2>
+        <div class="space-y-8">
           {posts.map((post) => (
-            <div class="border p-4 rounded transition-colors">
-              <h3 class="font-bold text-xl">
-                <a
-                  href={`/posts/${post.id}`}
-                  class="transition-colors"
-                >
+            <article>
+              <a href={`/posts/${post.id}`} class="group block">
+                <h3 class="text-xl font-semibold group-hover:text-indigo-300 transition-colors">
                   {post.data.title}
-                </a>
-              </h3>
-              <div class="flex gap-2 mt-2">
-                {(post.data.tags ?? []).map((t) => (
-                  <span class="text-xs ">#{t}</span>
-                ))}
-              </div>
-            </div>
+                </h3>
+                {post.data.description && (
+                  <p class="text-zinc-500 italic text-sm mb-2">{post.data.description}</p>
+                )}
+              </a>
+            </article>
           ))}
         </div>
       </section>
