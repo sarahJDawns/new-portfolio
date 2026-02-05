@@ -30,7 +30,7 @@ export const ABOUT: Metadata = {
 export const SOCIALS: Socials = [
   {
     NAME: "Email",
-    HREF: "mailto:sarah.j.dawns@gmail.com?subject=Website%20Inquiry&body=Hello%20there!",
+    HREF: "mailto:sarahdawnjohn@gmail.com?subject=Website%20Inquiry&body=Hello%20there!",
   },
   {
     NAME: "GitHub",
