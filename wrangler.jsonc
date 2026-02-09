@@ -1,16 +1,11 @@
 {
-	"main": "dist/_worker.js/index.js",
-	"name": "new-portfolio",
+  "name": "new-portfolio",
   "compatibility_date": "2026-01-31",
   "compatibility_flags": [
-    "nodejs_compat",
-    "global_fetch_strictly_public"
+    "nodejs_compat"
   ],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist"
-	},
-	"observability": {
+  "pages_build_output_dir": "./dist",
+  "observability": {
     "enabled": true
   }
 }
