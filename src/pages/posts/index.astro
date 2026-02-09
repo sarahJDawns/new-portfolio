@@ -17,8 +17,8 @@ const title = `${SITE.TITLE} | ${POSTS.TITLE}`;
 
 <BaseLayout title={title}>
   <section class="mb-16">
-    <h1 class="text-4xl font-bold mb-2 text-white">{POSTS.TITLE}</h1>
-    <p class="text-lg italic text-zinc-400">
+    <h1 class="text-4xl font-bold mb-2">{POSTS.TITLE}</h1>
+    <p class="text-sm tracking-widest font-semibold ">
       {POSTS.DESCRIPTION}
     </p>
   </section>
@@ -29,19 +29,19 @@ const title = `${SITE.TITLE} | ${POSTS.TITLE}`;
         posts.map((post) => (
           <a
             href={`/posts/${post.id}`}
-            class="group block overflow-hidden  bg-zinc-900 transition-all"
+            class="group block overflow-hidden   transition-all"
           >
             {post.data.image ? (
               <Image
                 src={post.data.image}
                 alt={post.data.imageAlt || post.data.title}
-                class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-full object-cover aspect-square"
                 format="webp"
                 quality="high"
               />
             ) : (
               /* Fallback if a post is missing an image */
-              <div class="aspect-square flex items-center justify-center bg-zinc-900 text-zinc-700 uppercase tracking-widest text-xs">
+              <div class="aspect-square flex items-center justify-center uppercase tracking-widest text-xs">
                 {post.data.title}
               </div>
             )}

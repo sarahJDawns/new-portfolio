@@ -4,21 +4,21 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { SITE, PROJECTS } from "@/consts";
 
-const allProjects: CollectionEntry<"projects">[] = await getCollection("projects");
+const allProjects: CollectionEntry<"projects">[] =
+  await getCollection("projects");
 
 const projects = allProjects.sort(
-  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) => 
-    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf()
+  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
+    new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf(),
 );
 
 const title = `${SITE.TITLE} | ${PROJECTS.TITLE}`;
-
 ---
 
 <BaseLayout title={title}>
   <section class="mb-16">
-    <h1 class="text-4xl font-bold mb-2 text-white">{PROJECTS.TITLE}</h1>
-    <p class="text-lg italic text-zinc-400">
+    <h1 class="text-4xl font-bold mb-2">{PROJECTS.TITLE}</h1>
+    <p class="text-sm tracking-widest font-semibold">
       {PROJECTS.DESCRIPTION}
     </p>
   </section>
@@ -29,37 +29,33 @@ const title = `${SITE.TITLE} | ${PROJECTS.TITLE}`;
         projects.map((project) => (
           <article>
             <a href={`/projects/${project.id}`} class="group">
-              <h3 class="text-xl font-semibold mb-1 group-hover:text-indigo-300 transition-colors">
+              <h3 class="text-xl font-semibold mb-1 transition-colors">
                 {project.data.title}
               </h3>
-              <p class="text-zinc-400 italic mb-3">{project.data.description}</p>
+              <p class="italic mb-3">{project.data.description}</p>
             </a>
 
-            {/* Always Colored Tags */}
             <div class="flex gap-3 mb-4">
               {(project.data.tags ?? []).map((tag) => (
-                <a 
-                  href={`/tags/${tag}`} 
-                  class="tag-link text-sm font-medium "
-                >
+                <a href={`/tags/${tag}`} class="tag-link text-sm font-medium ">
                   #{tag}
                 </a>
               ))}
             </div>
 
             <div class="flex gap-4">
-              {
-                project.data.links?.map((link: { name: string; url: string }) => (
+              {project.data.links?.map(
+                (link: { name: string; url: string }) => (
                   <a
                     href={link.url}
-                    class="text-zinc-500 hover:text-indigo-300 text-sm font-medium transition-colors"
+                    class="project-link text-sm font-medium transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {link.name} &rarr;
                   </a>
-                ))
-              }
+                ),
+              )}
             </div>
           </article>
         ))

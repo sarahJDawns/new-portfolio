@@ -1,90 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* THE SOURCE OF TRUTH - Pointing to Tailwind's internal palette */
-  --color-app-bg: theme('colors.zinc.950');
-  --color-app-text: theme('colors.zinc.300');
-  --color-app-muted: theme('colors.zinc.500');
-  
-  /* Pick your flavor here: violet, purple, fuchsia, etc. */
-  --color-app-accent: theme('colors.indigo.400');
-  --color-app-accent-hover: theme('colors.indigo.300');
-  
-  --color-app-border: theme('colors.zinc.800');
+  --color-app-bg: hsl(60, 14%, 95%);
+
+  --color-app-text: hsl(0, 0%, 10%);
+
+  --color-app-muted: hsl(60, 4%, 44%);
+
+  --color-app-accent: hsl(10, 62%, 46%);
+
+  --color-app-border: hsl(60, 8%, 82%);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui;
+  --font-display: "Space Grotesk", sans-serif;
 }
 
-/* 1. Global Base */
 body {
   background-color: var(--color-app-bg);
   color: var(--color-app-text);
+  font-family: var(--font-sans);
+  h1, h2, h3, h4, .font-display {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+    }
 }
 
-/* 2. Navigation & Footer Links */
-nav a, 
+nav a,
 footer a {
   color: var(--color-app-muted);
   transition: color 0.2s;
 }
 
-nav a:hover, 
+nav a:hover,
 footer a:hover {
-  color: theme('colors.white'); 
+  color: var(--color-app-text);
 }
 
-/* The Logo/Title is special */
 nav a.font-bold {
-  color: theme('colors.white');
+  color: var(--color-app-text);
 }
 
 nav a.font-bold:hover {
-  color: var(--color-app-accent-hover);
+  color: var(--color-app-accent);
 }
 
-/* 3. Article Titles (List Pages) */
 article a h3 {
   color: var(--color-app-text);
   transition: color 0.2s;
 }
 
 article a:hover h3 {
-  color: var(--color-app-accent-hover);
+  color: var(--color-app-accent);
 }
 
-/* 4. Tags (Always Colored) */
+article p {
+  color: var(--color-app-muted);
+}
+
+article a {
+  color: var(--color-app-accent);
+}
+
+.about-text {
+  color: var(--color-app-text);
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
 .tag-link {
-  color: var(--color-app-accent) !important;
-  @apply transition-colors no-underline;
+  color: var(--color-app-text) !important;
+  background-color: transparent;
+  border: 1px solid var(--color-app-border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  @apply transition-all no-underline;
 }
 
 .tag-link:hover {
-  color: var(--color-app-accent-hover) !important;
-  @apply underline;
+  background-color: var(--color-app-text);
+  color: var(--color-app-bg) !important;
 }
 
-/* 5. Typography Plugin */
 .prose {
-  @apply prose-invert max-w-none;
+  --tw-prose-bullets: var(--color-app-accent);
+  --tw-prose-headings: var(--color-app-text);
+  --tw-prose-body: var(--color-app-text);
+  --tw-prose-bold: var(--color-app-text);
   --tw-prose-links: var(--color-app-accent);
-  --tw-prose-invert-links: var(--color-app-accent);
 }
 
-.prose a:hover {
-  color: var(--color-app-accent-hover) !important;
-  @apply underline;
+.prose ul > li::marker {
+  color: var(--color-app-accent) !important;
 }
 
-/* 6. Layout Borders */
-.border-b, .border-t, .border {
-  border-color: var(--color-app-border) !important;
+.prose ul > li::marker {
+  font-size: 0.8em;
 }
 
-.copyright-text {
-  color: theme('colors.white'); 
+.prose ul {
+  padding-left: 1.5rem;
+  list-style-type: square;
 }
 
-.copy-symbol {
-  color: theme('colors.white'); 
-  margin-right: 2px; 
+.tag-header-pill {
+  background-color: var(--color-app-text);
+  color: var(--color-app-bg);
+  padding: 4px 12px; 
+  border-radius: 4px;  
+  display: inline-block;
+  line-height: 1; 
+  font-family: var(--font-display);  
 }

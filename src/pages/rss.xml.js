@@ -1,11 +1,12 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import { render } from 'astro:content'; // New in Astro 5
+import sanitizeHtml from 'sanitize-html';
 
 export async function GET(context) {
   const posts = await getCollection('posts');
   const projects = await getCollection('projects');
 
-  // Combine and sort by date
   const items = [...posts, ...projects].sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
   );
@@ -14,11 +15,19 @@ export async function GET(context) {
     title: 'Sarah J | Ink & Code',
     description: 'A collection of digital logic and analog art.',
     site: context.site,
-    items: items.map((item) => ({
-      title: item.data.title,
-      pubDate: item.data.pubDate,
-      description: item.data.description || '',
-      link: `/${item.collection}/${item.id}/`,
+    items: await Promise.all(items.map(async (item) => {
+      // This renders the markdown into HTML
+      const { rendered } = await render(item);
+      
+      return {
+        title: item.data.title,
+        pubDate: item.data.pubDate,
+        description: item.data.description || '',
+        link: `/${item.collection}/${item.id}/`,
+        content: sanitizeHtml(rendered?.html ?? '', {
+          allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+        }),
+      };
     })),
     customData: `<language>en-us</language>`,
   });

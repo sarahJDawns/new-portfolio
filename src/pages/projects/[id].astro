@@ -34,21 +34,21 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={project.data.title}>
-  <a href="/projects" class="text-zinc-500 hover:text-indigo-300 hover:underline mb-8 block transition-colors"
+  <a href="/projects" class=" hover:underline mb-8 block transition-colors"
     >&larr; Back to Projects</a
   >
 
   <article>
     <header class="mb-12">
-      <h1 class="text-4xl font-bold text-white mb-2">{project.data.title}</h1>
-      <p class="text-lg italic text-zinc-400">{project.data.description}</p>
+      <h1 class="text-4xl font-bold mb-2">{project.data.title}</h1>
+      <p class="text-lg italic ">{project.data.description}</p>
 
       <div class="flex gap-3 mt-6  mb-4">
         {
           (project.data.tags ?? []).map((tag) => (
             <a
               href={`/tags/${tag}`}
-              class="tag-link text-sm font-medium " 
+              class="tag-link" 
             >
               #{tag}
             </a>
@@ -61,7 +61,7 @@ const { Content } = await render(project);
           project.data.links?.map((link: { name: string; url: string }) => (
             <a
               href={link.url}
-              class="text-zinc-500 hover:text-indigo-300 text-sm font-medium transition-colors"
+              class="project-link text-sm font-medium transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -72,7 +72,7 @@ const { Content } = await render(project);
       </div>
     </header>
 
-    <div class="prose prose-invert max-w-none">
+    <div class="prose max-w-none">
       <Content />
     </div>
 
@@ -82,7 +82,6 @@ const { Content } = await render(project);
           <Image
             src={project.data.image}
             alt={project.data.imageAlt || ""}
-            class="rounded-lg border border-zinc-800"
             format="webp"
             quality="high"
           />
@@ -91,11 +90,11 @@ const { Content } = await render(project);
     }
 
     <nav
-      class="flex justify-between items-center font-sans text-xs uppercase tracking-widest mt-20 pt-8 border-t border-zinc-800"
+      class="flex justify-between items-center font-sans text-xs  tracking-widest mt-20 pt-8 "
     >
       {
         prevProject ? (
-          <a href={`/projects/${prevProject.id}`} class="text-zinc-500 hover:text-indigo-300 transition-colors">
+          <a href={`/projects/${prevProject.id}`} class="transition-colors">
             ← {prevProject.data.title}
           </a>
         ) : (
@@ -105,7 +104,7 @@ const { Content } = await render(project);
 
       {
         nextProject ? (
-          <a href={`/projects/${nextProject.id}`} class="text-zinc-500 hover:text-indigo-300 transition-colors text-right">
+          <a href={`/projects/${nextProject.id}`} class="transition-colors text-right">
             {nextProject.data.title} →
           </a>
         ) : (

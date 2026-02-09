@@ -7,15 +7,19 @@ import { Image } from "astro:assets";
 
 const projects: CollectionEntry<"projects">[] = (
   await getCollection("projects")
-).sort(
-  (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 3);
+)
+  .sort(
+    (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 3);
 
-const posts: CollectionEntry<"posts">[] = (await getCollection("posts")).sort(
-  (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-).slice(0, 3);
+const posts: CollectionEntry<"posts">[] = (await getCollection("posts"))
+  .sort(
+    (a: CollectionEntry<"posts">, b: CollectionEntry<"posts">) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  )
+  .slice(0, 3);
 
 const title = `${SITE.TITLE} | ${HOME.TITLE}`;
 ---
@@ -28,25 +32,20 @@ const title = `${SITE.TITLE} | ${HOME.TITLE}`;
   </section>
 
   <section class="mb-16">
-    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-800 pb-3">
-      Recent Projects
-    </h2>
+    <h2 class="text-2xl font-semibold mb-6 border-b  pb-3">Recent Projects</h2>
     <div class="space-y-10">
       {
         projects.map((project) => (
           <article>
             <a href={`/projects/${project.id}`} class="group">
-              <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-300 transition-colors">
+              <h3 class="text-xl font-semibold mb-2 transition-colors">
                 {project.data.title}
               </h3>
-              <p class="italic text-zinc-400">{project.data.description}</p>
+              <p class="italic">{project.data.description}</p>
             </a>
             <div class="flex gap-3 mt-4">
               {(project.data.tags ?? []).map((tag) => (
-                <a 
-                  href={`/tags/${tag}`} 
-                  class="tag-link"
-                >
+                <a href={`/tags/${tag}`} class="tag-link">
                   #{tag}
                 </a>
               ))}
@@ -58,27 +57,22 @@ const title = `${SITE.TITLE} | ${HOME.TITLE}`;
   </section>
 
   <section>
-    <h2 class="text-2xl font-semibold mb-6 border-b border-zinc-800 pb-3">
-      From the Studio
-    </h2>
+    <h2 class="text-2xl font-semibold mb-6 border-b pb-3">From the Studio</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {
         posts.map((post) => (
-          <a
-            href={`/posts/${post.id}`}
-            class="group block overflow-hidden  bg-zinc-900 transition-all"
-          >
+          <a href={`/posts/${post.id}`} class="group block overflow-hidden">
             {post.data.image ? (
               <Image
                 src={post.data.image}
                 alt={post.data.imageAlt || post.data.title}
-                class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-full object-cover aspect-square "
                 format="webp"
                 quality="high"
               />
             ) : (
               /* Fallback if a post is missing an image */
-              <div class="aspect-square flex items-center justify-center bg-zinc-900 text-zinc-700 uppercase tracking-widest text-xs">
+              <div class="aspect-square flex items-center justify-centeruppercase tracking-widest text-xs">
                 {post.data.title}
               </div>
             )}

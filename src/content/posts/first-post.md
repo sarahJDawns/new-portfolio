@@ -6,4 +6,4 @@ image: "@/assets/grid.png"
 imageAlt: "Friend Image"
 tags: ["Friend"]
 ---
-Catching flying discs.
+Catching all flying discs.

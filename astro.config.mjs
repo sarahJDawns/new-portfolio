@@ -17,7 +17,7 @@ export default defineConfig({
           },
         },
   },
-  
+  site: 'https://sarahj.pages.dev',
   integrations: [],
 
   adapter: cloudflare()

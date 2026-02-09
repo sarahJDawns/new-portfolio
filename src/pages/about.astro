@@ -10,19 +10,20 @@ const title = `${SITE.TITLE} | ${ABOUT.TITLE}`;
 <BaseLayout title={title}>
   <article class="prose">
     <h1 class="text-3xl font-bold mb-6">The Story</h1>
-    <p class="text-lg italic">
-      Crafting thoughtful solutions with code and bringing ideas to life with
-      ink and watercolor.
-    </p>
-
-    <h2 class="text-xl font-semibold mt-8 mb-4">This is my friend, Grid.</h2>
+    <!-- <p class="about-text text-lg">
+      Crafting thoughtful solutions with code and bringing ideas to life with ink and watercolor.
+    </p> -->
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm tracking-widest font-semibold">
+      <span class="text-app-text">Building a better home.</span>
+      <span class="text-app-accent">Outdoors by Default.</span>
+    </div>
+    <p class="text-sm font-semibold mt-8 mb-4">This is my friend, Grid.</>
     <Image 
       src={myImage} 
       alt="This is my friend, Grid." 
       width={300}  
       format="webp" 
       quality="high" 
-      class="rounded-lg"
     />
     
   </article>
