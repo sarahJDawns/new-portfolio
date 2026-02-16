@@ -2,6 +2,7 @@
 title: "Garden Planner"
 description: "Web app designed to streamline the gardening experience, providing a COMPREHENSIVE set of tools and features to plan, track, and optimize the gardening journey."
 pubDate: 2026-02-01
+draft: false
 image: "../../assets/garden-planner.png" 
 imageAlt: "Garden Planner"
 links:

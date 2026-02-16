@@ -2,6 +2,7 @@
 title: "HTML Email"
 description: "Showcases a collection of HTML email templates designed for Echo Apiary, a sustainable beekeeping company offering delicious honey and handcrafted beeswax products."
 pubDate: 2026-02-01
+draft: false
 image: "../../assets/html-email.png" 
 imageAlt: "HTML Email Templates"
 links:

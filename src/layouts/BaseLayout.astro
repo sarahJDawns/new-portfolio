@@ -13,14 +13,14 @@ const { title = "Portfolio" } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta
       name="description"
-      content="Building a better home for art and code."
+      content="Building a better home."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://sarahj.pages.dev/" />
     <meta property="og:title" content="SarahJ | Portfolio" />
     <meta
       property="og:description"
-      content="Art, Code, and Outdoors by Default."
+      content="Outdoors by Default."
     />
     <meta property="og:image" content="/og-image.jpg" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -54,20 +54,6 @@ const { title = "Portfolio" } = Astro.props;
               <ul class="flex gap-8 items-center font-sans">
                 <li>
                   <a
-                    href="/projects"
-                    class="text-xs font-semibold uppercase tracking-widest"
-                    >Code</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/posts"
-                    class="text-xs font-semibold uppercase tracking-widest"
-                    >Art</a
-                  >
-                </li>
-                <li>
-                  <a
                     href="/about"
                     class="text-xs font-semibold uppercase tracking-widest"
                     >About</a
@@ -91,17 +77,17 @@ const { title = "Portfolio" } = Astro.props;
             class="flex flex-col md:flex-row md:items-baseline justify-between gap-8"
           >
             <div class="flex gap-6">{
-                SOCIALS.map((social) => (
-                  <a
-                    href={social.HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-xs font-semibold uppercase tracking-widest"
-                  >
-                    {social.NAME}
-                  </a>
-                ))
-              }
+              SOCIALS.map((social) => (
+                <a
+                  href={social.HREF}
+                  target={social.NAME === "RSS" ? "_self" : "_blank"}
+                  rel="noopener noreferrer"
+                  class="text-xs font-semibold uppercase tracking-widest hover:text-accent"
+                >
+                  {social.NAME}
+                </a>
+              ))
+            }
             </div>
             <p class="text-xs font-semibold uppercase tracking-widest">
               <span>&copy;</span>

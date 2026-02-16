@@ -2,6 +2,7 @@
 title: "Social Messaging App for Gardeners"
 description: "Social messaging and photo sharing app for home veg growers. Sign up, log in and delete account. Create a post with a heading, caption, or upload photo. Logged in users can like others' posts and comments and delete their own."
 pubDate: 2026-02-01
+draft: false
 image: "../../assets/social-messaging-app.png" 
 imageAlt: "Social App for Gardeners"
 links:

@@ -3,9 +3,8 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
   const projects = await getCollection("projects");
-  const allContent = [...posts, ...projects];
+  const allContent = [...projects];
 
   const allTags = [
     ...new Set(allContent.flatMap((item) => item.data.tags || [])),
@@ -15,13 +14,12 @@ export async function getStaticPaths() {
     params: { tag },
     props: {
       tag,
-      posts: posts.filter((p) => (p.data.tags || []).includes(tag)),
       projects: projects.filter((p) => (p.data.tags || []).includes(tag)),
     },
   }));
 }
 
-const { tag, posts, projects } = Astro.props;
+const { tag, projects } = Astro.props;
 ---
 
 <BaseLayout title={`Tag: ${tag}`}>
@@ -55,25 +53,4 @@ const { tag, posts, projects } = Astro.props;
     )
   }
 
-  {
-    posts.length > 0 && (
-      <section>
-        <h2 class="text-xl font-semibold mb-6 border-b">Posts</h2>
-        <div class="space-y-8">
-          {posts.map((post) => (
-            <article>
-              <a href={`/posts/${post.id}`} class="group block">
-                <h3 class="text-xl font-semiboldtransition-colors">
-                  {post.data.title}
-                </h3>
-                {post.data.description && (
-                  <p class="italic text-sm mb-2">{post.data.description}</p>
-                )}
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-    )
-  }
 </BaseLayout>

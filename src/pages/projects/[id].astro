@@ -34,7 +34,7 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={project.data.title}>
-  <a href="/projects" class="hover:underline mb-8 block transition-colors"
+  <a href="/" class="hover:underline mb-8 block transition-colors"
     >&larr; Back to Projects</a
   >
 
@@ -44,7 +44,7 @@ const { Content } = await render(project);
 
       {
         project.data.image && (
-          <div class="mt-4 mb-4">
+          <div class="mt-8 mb-8">
             <Image
               src={project.data.image}
               alt={project.data.imageAlt || ""}
@@ -88,7 +88,7 @@ const { Content } = await render(project);
     </div>
 
     <nav
-      class="flex justify-between items-center font-sans text-xs tracking-widest mt-20 pt-8"
+      class="flex justify-between items-center font-sans text-xs tracking-widest mt-14"
     >
       {
         prevProject ? (

@@ -3,23 +3,11 @@ export const SITE: Site = {
   TITLE: "Sarah J",
   DESCRIPTION: "A collection.",
   EMAIL: "sarah.j.dawns@gmail.com",
-  NUM_PROJECTS_ON_HOMEPAGE: 3,
-  NUM_POSTS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
+  TITLE: "Projects",
   DESCRIPTION: "A collection.",
-};
-
-export const PROJECTS: Metadata = {
-  TITLE: "Code",
-  DESCRIPTION: "A collection of my technical work and experiments.",
-};
-
-export const POSTS: Metadata = {
-  TITLE: "Art",
-  DESCRIPTION: "Ink, watercolor, and occasionally something else.",
 };
 
 export const ABOUT: Metadata = {
@@ -39,5 +27,9 @@ export const SOCIALS: Socials = [
   {
     NAME: "X",
     HREF: "https://x.com/sjdawns",
-  }
+  },
+  {
+    NAME: "RSS",
+    HREF: "/rss.xml",
+  },
 ];
