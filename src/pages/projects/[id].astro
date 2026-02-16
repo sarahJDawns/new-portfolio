@@ -34,28 +34,39 @@ const { Content } = await render(project);
 ---
 
 <BaseLayout title={project.data.title}>
-  <a href="/projects" class=" hover:underline mb-8 block transition-colors"
+  <a href="/projects" class="hover:underline mb-8 block transition-colors"
     >&larr; Back to Projects</a
   >
 
   <article>
     <header class="mb-12">
       <h1 class="text-4xl font-bold mb-2">{project.data.title}</h1>
-      <p class="text-lg italic ">{project.data.description}</p>
 
-      <div class="flex gap-3 mt-6  mb-4">
+      {
+        project.data.image && (
+          <div class="mt-4 mb-4">
+            <Image
+              src={project.data.image}
+              alt={project.data.imageAlt || ""}
+              format="webp"
+              quality="high"
+            />
+          </div>
+        )
+      }
+
+      <p class="text-lg italic">{project.data.description}</p>
+
+      <div class="flex gap-3 mt-6 mb-4">
         {
           (project.data.tags ?? []).map((tag) => (
-            <a
-              href={`/tags/${tag}`}
-              class="tag-link" 
-            >
+            <a href={`/tags/${tag}`} class="tag-link">
               #{tag}
             </a>
           ))
         }
       </div>
-      
+
       <div class="flex gap-4">
         {
           project.data.links?.map((link: { name: string; url: string }) => (
@@ -76,21 +87,8 @@ const { Content } = await render(project);
       <Content />
     </div>
 
-    {
-      project.data.image && (
-        <div class="mt-12">
-          <Image
-            src={project.data.image}
-            alt={project.data.imageAlt || ""}
-            format="webp"
-            quality="high"
-          />
-        </div>
-      )
-    }
-
     <nav
-      class="flex justify-between items-center font-sans text-xs  tracking-widest mt-20 pt-8 "
+      class="flex justify-between items-center font-sans text-xs tracking-widest mt-20 pt-8"
     >
       {
         prevProject ? (
@@ -104,7 +102,10 @@ const { Content } = await render(project);
 
       {
         nextProject ? (
-          <a href={`/projects/${nextProject.id}`} class="transition-colors text-right">
+          <a
+            href={`/projects/${nextProject.id}`}
+            class="transition-colors text-right"
+          >
             {nextProject.data.title} →
           </a>
         ) : (
